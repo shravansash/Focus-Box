@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Focus Box</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">F</div><div><b>FOCUS BOX</b><small>Digital focus system</small></div></div>
+      <nav>
+        <a class="nav-link active" href="#overview">Overview</a>
+        <a class="nav-link" href="#blocklist">Website blocker</a>
+        <a class="nav-link" href="#insights">Insights</a>
+        <a class="nav-link" href="#device">Focus box device</a>
+      </nav>
+      <div class="sidebar-note"><span class="status-dot"></span><span id="connectionLabel">Browser extension active</span></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><p class="eyebrow">YOUR WORKSPACE</p><h1>Focus dashboard</h1></div>
+        <div class="top-actions"><span class="pill" id="sessionPill">SESSION INACTIVE</span><button class="button ghost" id="refreshBtn">Refresh</button></div>
+      </header>
+
+      <section id="overview" class="grid-main">
+        <article class="panel timer-panel">
+          <div class="panel-head"><div><p class="eyebrow">CURRENT SESSION</p><h2 id="sessionTitle">Ready when you are</h2></div><span class="live-indicator" id="liveIndicator">● READY</span></div>
+          <div class="timer-wrap"><div class="timer-ring"><div><strong id="timer">45:00</strong><span id="timerCaption">MINUTES REMAINING</span></div></div></div>
+          <div class="controls">
+            <label class="field">Focus mode
+              <select id="mode">
+                <option value="STUDY">Study</option><option value="READING">Reading</option>
+                <option value="CREATIVE">Creative work</option><option value="FILMMAKING">Filmmaking</option>
+                <option value="CUSTOM">Custom</option>
+              </select>
+            </label>
+            <label class="field">Duration (minutes)<input id="duration" type="number" min="1" max="240" value="45"></label>
+          </div>
+          <div class="button-row"><button class="button primary" id="startBtn">Start focus session</button><button class="button danger" id="endBtn">End session</button></div>
+          <p class="muted small" id="sessionMessage">Start a session to activate your website blocklist.</p>
+        </article>
+
+        <div class="side-stack">
+          <article class="panel stat-card"><p class="eyebrow">TOTAL FOCUS TIME</p><strong class="stat-value" id="focusTime">0h 0m</strong><span class="muted">Across recorded sessions</span></article>
+          <article class="panel stat-card"><p class="eyebrow">BLOCKED ATTEMPTS</p><strong class="stat-value" id="blockedCount">0</strong><span class="muted">Redirects to the intervention page</span></article>
+          <article class="panel stat-card"><p class="eyebrow">COMPLETED SESSIONS</p><strong class="stat-value" id="completedCount">0</strong><span class="muted">Sessions reaching their timer</span></article>
+        </div>
+      </section>
+
+      <section id="blocklist" class="panel section-panel">
+        <div class="section-heading"><div><p class="eyebrow">BOUNDARIES</p><h2>Website blocker</h2><p class="muted">These domains are redirected while a focus session is active.</p></div><span class="pill">ACTIVE DURING SESSION</span></div>
+        <div class="add-site"><input id="siteInput" placeholder="Enter a domain, e.g. reddit.com"><button class="button secondary" id="addSiteBtn">Add website</button></div>
+        <div id="siteList" class="site-list"></div>
+        <div class="notice">A normal website cannot block other tabs. This dashboard runs as a browser extension so it can enforce these rules in this browser profile.</div>
+      </section>
+
+      <section id="insights" class="panel section-panel">
+        <div class="section-heading"><div><p class="eyebrow">PERFORMANCE</p><h2>Focus insights</h2><p class="muted">Your activity is stored locally in this browser.</p></div></div>
+        <div class="insight-grid">
+          <div class="insight-box"><span class="muted">Total sessions</span><strong id="totalSessions">0</strong></div>
+          <div class="insight-box"><span class="muted">Temporary overrides</span><strong id="overrideCount">0</strong></div>
+          <div class="insight-box"><span class="muted">Focus minutes</span><strong id="focusMinutes">0</strong></div>
+        </div>
+        <h3 class="subheading">Recent activity</h3>
+        <div id="history" class="history-list"><p class="muted">No sessions recorded yet.</p></div>
+      </section>
+
+      <section id="device" class="panel section-panel">
+        <div class="section-heading"><div><p class="eyebrow">OPTIONAL HARDWARE</p><h2>Focus Box device</h2><p class="muted">Connect an ESP32 BLE device to send the selected mode and timer.</p></div><span class="pill" id="bleStatus">NOT CONNECTED</span></div>
+        <div class="ble-row"><button class="button secondary" id="bleConnect">Connect ESP32</button><button class="button ghost" id="bleSend" disabled>Sync current session</button></div>
+        <p class="muted small" id="bleMessage">Requires ESP32 firmware exposing the Nordic UART Service (NUS). See README for UUIDs.</p>
+      </section>
+      <footer>FOCUS BOX · Local-first prototype · Website blocking requires the extension to remain enabled.</footer>
+    </main>
+  </div>
+  <script src="dashboard.js"></script>
+</body>
+</html>
